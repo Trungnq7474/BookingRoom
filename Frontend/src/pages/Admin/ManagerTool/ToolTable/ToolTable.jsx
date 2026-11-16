@@ -82,6 +82,16 @@ function ToolTable({ onView, onEdit }) {
             status: "Hoạt Động",
             statusClass: "common-status-active",
             statusIcon: "fa-solid fa-square-check"
+        },
+
+        {
+            stt: "#006",
+            image: micro,
+            name: "Ổ Điện",
+            type: "Ổ Điện",
+            status: "Hoạt Động",
+            statusClass: "common-status-active",
+            statusIcon: "fa-solid fa-square-check"
         }
     ];
 
