@@ -1,19 +1,23 @@
 import Table from "../../../../components/Table/Table.jsx";
 
-function UserTable({ onEdit }) {
+function UserTable({ data, onEdit }) {
 
         const columns = [
-            { title: "STT", key: "stt" },
+            { title: "STT", key: "user_id" },
 
-            { title: "Mã Số", key: "maSo" },
+            { title: "Mã Số", key: "user_code" },
 
-            { title: "Họ Và Tên", key: "hoTen" },
+            { title: "Họ Và Tên", key: "full_name" },
 
             {
                 title: "Vai Trò",
-                key: "vaiTro",
-                render: (value, item) => (
-                    <span className={item.roleClass}>
+                key: "role",
+                render: (value) => (
+                    <span className={
+                        value === "Sinh Viên" ? "common-student":
+                        value === "Giảng Viên" ? "common-teacher":
+                        value === "Nhân Viên Kỹ Thuật" ? "common-technician" : ""
+                    }>
                         {value}
                     </span>
                 )
@@ -21,39 +25,7 @@ function UserTable({ onEdit }) {
 
             { title: "Email", key: "email" },
 
-            { title: "Số Điện Thoại", key: "soDienThoai" }
-        ];
-
-        const data = [
-            {
-                stt: "#001",
-                maSo: "077205001847",
-                hoTen: "Nguyễn Văn A",
-                vaiTro: "Sinh Viên",
-                roleClass: "common-student",
-                email: "nva1847@ut.edu.vn",
-                soDienThoai: "0123456789"
-            },
-
-            {
-                stt: "#002",
-                maSo: "077205001848",
-                hoTen: "Trần Văn B",
-                vaiTro: "Giảng Viên",
-                roleClass: "common-teacher",
-                email: "tvb1848@ut.edu.vn",
-                soDienThoai: "0123456789"
-            },
-
-            {
-                stt: "#003",
-                maSo: "077205001849",
-                hoTen: "Võ Thị C",
-                vaiTro: "Nhân Viên Kỹ Thuật",
-                roleClass: "common-technician",
-                email: "vtc1849@ut.edu.vn",
-                soDienThoai: "0123456789"
-            }
+            { title: "Số Điện Thoại", key: "phone" }
         ];
 
         const actions = [

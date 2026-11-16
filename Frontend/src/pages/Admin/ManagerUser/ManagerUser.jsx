@@ -4,12 +4,14 @@ import Pagination from "../../../components/Pagination/Pagination.jsx";
 import UserForm from "./UserForm/UserForm.jsx";
 import useAdd from "../../../hooks/useAdd.js";
 import useEdit from "../../../hooks/useEdit.js";
+import useUsers from "../../../hooks/useUsers.js";
 
 
 function ManagerUser() {
 
     const { show, setShow } = useAdd();
     const { showEdit, setShowEdit } = useEdit();
+    const { users } = useUsers();
 
     return (
         <>
@@ -17,7 +19,10 @@ function ManagerUser() {
 
             <section className="content">
 
-                <UserTable onEdit={() => setShowEdit(true)}/>
+                <UserTable 
+                    onEdit={() => setShowEdit(true)}
+                    data={users}
+                />
 
                 <Pagination />
 
