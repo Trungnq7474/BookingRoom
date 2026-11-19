@@ -1,6 +1,6 @@
 import Table from "../../../../components/Table/Table.jsx";
 
-function UserTable({ data, onEdit }) {
+function UserTable({ data, onEdit, onDelete }) {
 
         const columns = [
             { title: "STT", key: "user_id" },
@@ -14,6 +14,7 @@ function UserTable({ data, onEdit }) {
                 key: "role",
                 render: (value) => (
                     <span className={
+                        value === "Admin" ? "common-admin":
                         value === "Sinh Viên" ? "common-student":
                         value === "Giảng Viên" ? "common-teacher":
                         value === "Nhân Viên Kỹ Thuật" ? "common-technician" : ""
@@ -39,7 +40,8 @@ function UserTable({ data, onEdit }) {
             {
                 label: "Xóa",
                 icon: "fa-regular fa-trash-can",
-                className: "common-delete-button"
+                className: "common-delete-button",
+                onClick: onDelete
             }
         ];
     

@@ -6,12 +6,11 @@ import useAdd from "../../../hooks/useAdd.js";
 import useEdit from "../../../hooks/useEdit.js";
 import useUsers from "../../../hooks/useUsers.js";
 
-
 function ManagerUser() {
 
     const { show, setShow } = useAdd();
-    const { showEdit, setShowEdit } = useEdit();
-    const { users } = useUsers();
+    const { showEdit, setShowEdit, selectedUser, setSelectedUser } = useEdit();
+    const { users, addUsers, editUsers, deleteUsers } = useUsers();
 
     return (
         <>
@@ -20,7 +19,21 @@ function ManagerUser() {
             <section className="content">
 
                 <UserTable 
-                    onEdit={() => setShowEdit(true)}
+                    onEdit={(item) => {
+                        setSelectedUser(item);
+                        setShowEdit(true);
+                    }}
+
+                    onDelete={(item) => {
+                        const confirmDelete = window.confirm(
+                            `Bạn Có Chắc Chắn Muốn Xóa Người Dùng "${item.full_name}" Không?`
+                        );
+
+                        if(confirmDelete) {
+                            deleteUsers(item.user_id);
+                        }
+                    }}
+
                     data={users}
                 />
 
@@ -31,6 +44,7 @@ function ManagerUser() {
             {show ? 
                 <UserForm 
                     onClose={() => setShow(false)}
+                    onAdd={addUsers}
                     isEdit={false} 
                 /> 
             : ""}
@@ -38,6 +52,8 @@ function ManagerUser() {
             {showEdit ? 
                 <UserForm 
                     onClose={() => setShowEdit(false)} 
+                    onEdit={editUsers}
+                    user={selectedUser}
                     isEdit={true}
                 /> 
             : ""} 

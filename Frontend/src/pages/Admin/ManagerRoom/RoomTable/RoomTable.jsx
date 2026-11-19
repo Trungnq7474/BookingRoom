@@ -4,91 +4,50 @@ import H509 from "../../../../assets/Room/H509.jpg";
 import library from "../../../../assets/Room/library.jpg";
 import I001 from "../../../../assets/Room/I001.jpg";
 import I002 from "../../../../assets/Room/I002.jpg";
+import I101 from "../../../../assets/Room/I101.png";
 
-function RoomTable({ onView, onEdit }) {
+const roomImages = {
+    "H003.jpg": H003,
+    "H509.jpg": H509,
+    "library.jpg": library,
+    "I001.jpg": I001,
+    "I002.jpg": I002,
+    "I101.png": I101
+};
+
+function RoomTable({ data, onView, onEdit }) {
 
     const columns = [
-        { title: "STT", key: "stt" },
+        { title: "STT", key: "room_id" },
 
         {   title: "Hình Ảnh", 
             key: "image",
             render: (image) => (
-                <img src={image} alt="Ảnh" className="common-image"/>
+                <img src={roomImages[image]} alt="Ảnh" className="common-image"/>
             )
         },
 
-        { title: "Tên Phòng", key: "name" },
+        { title: "Tên Phòng", key: "roomname" },
 
-        { title: "Khu Vực", key: "area" },
+        { title: "Khu Vực", key: "location" },
+
+        { title: "Tầng", key: "floor" },
 
         { title: "Sức Chứa", key: "capacity" },
 
         {
             title: "Trạng Thái",
             key: "status",
-            render: (value, item) => (
-                <span className={item.statusClass}>
-                    <i className={item.statusIcon}></i>
+            render: (value) => (
+                <span className={
+                    value === "Hoạt Động" ? "common-status-active" : "common-status-maintenance"
+                }>
+                    <i className={
+                        value === "Hoạt Động" ? "fa-solid fa-square-check" : "fa-solid fa-wrench"
+                    }></i>
                     {value}
                 </span>
             )
-        }
-    ];
-
-    const data = [
-        {
-            stt: "#001",
-            image: H003,
-            name: "Phòng Máy - H003",
-            area: "Khu H - Tầng Trệt",
-            capacity: "40 máy",
-            status: "Hoạt Động",
-            statusClass: "common-status-active",
-            statusIcon: "fa-solid fa-square-check"
-        },
-
-        {
-            stt: "#002",
-            image: H509,
-            name: "Phòng Máy - H509",
-            area: "Khu H - Tầng 5",
-            capacity: "40 máy",
-            status: "Hoạt Động",
-            statusClass: "common-status-active",
-            statusIcon: "fa-solid fa-square-check"
-        },
-
-        {
-            stt: "#003",
-            image: library,
-            name: "Phòng Thư Viện",
-            area: "Khu K - Tầng 1",
-            capacity: "22 máy",
-            status: "Hoạt Động",
-            statusClass: "common-status-active",
-            statusIcon: "fa-solid fa-square-check"
-        },
-
-        {
-            stt: "#004",
-            image: I001,
-            name: "Phòng Máy - I001",
-            area: "Khu I - Tầng Trệt",
-            capacity: "40 máy",
-            status: "Bảo Trì",
-            statusClass: "common-status-maintenance",
-            statusIcon: "fa-solid fa-wrench"
-        },
-
-        {
-            stt: "#005",
-            image: I002,
-            name: "Phòng Máy - I002",
-            area: "Khu I - Tầng Trệt",
-            capacity: "40 máy",
-            status: "Bảo Trì",
-            statusClass: "common-status-maintenance",
-            statusIcon: "fa-solid fa-wrench"
         }
     ];
 

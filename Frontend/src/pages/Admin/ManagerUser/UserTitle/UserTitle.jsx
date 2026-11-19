@@ -13,11 +13,10 @@ function UserTitle({ onAdd }) {
                 <div className="filter-box">
                     <select defaultValue="">
                         <option value="">Vai trò</option>
+                        <option value="Admin">Admin</option>
                         <option value="Sinh Viên">Sinh Viên</option>
                         <option value="Giảng Viên">Giảng Viên</option>
-                        <option value="Nhân Viên Kỹ Thuật">
-                            Nhân Viên Kỹ Thuật
-                        </option>
+                        <option value="Nhân Viên Kỹ Thuật">Nhân Viên Kỹ Thuật</option>
                     </select>
 
                     <i className="fa-solid fa-chevron-down"></i>

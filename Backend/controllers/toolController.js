@@ -1,12 +1,11 @@
 const db = require("../config/database.js");
 
-const getUser = async (req, res) => {
+const getTool = async (req, res) => {
     try {
         const [result] = await db.promise().query(
-            `SELECT user_id, user_code, full_name, email, phone, role, created_at 
-            FROM users`
+            `SELECT * FROM tools`
         );
-
+        
         res.json(result);
     }
 
@@ -15,4 +14,4 @@ const getUser = async (req, res) => {
     }
 };
 
-module.exports = { getUser };
+module.exports = { getTool };

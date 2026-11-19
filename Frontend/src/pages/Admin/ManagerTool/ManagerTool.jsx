@@ -6,12 +6,14 @@ import ToolDetail from "./ToolDetail/ToolDetail.jsx";
 import useForm from "../../../hooks/useAdd.js"
 import useEdit from "../../../hooks/useEdit.js"
 import useDetail from "../../../hooks/useDetail.js"
+import useTools from "../../../hooks/useTools.js";
 
 function ManagerTool() {
 
     const { show, setShow } = useForm();
     const { showEdit, setShowEdit } = useEdit();
     const { showDetail, setShowDetail } = useDetail();
+    const { tools } = useTools();
 
     return (
         <>
@@ -22,6 +24,7 @@ function ManagerTool() {
                 <ToolTable 
                     onView={() => setShowDetail(true)} 
                     onEdit={() => setShowEdit(true)}
+                    data={tools}
                 />
 
                 <Pagination />

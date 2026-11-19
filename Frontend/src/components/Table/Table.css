@@ -104,6 +104,11 @@
     background: #006f72;
 }
 
+.common-admin {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+
 .common-student {
     color: rgb(4, 0, 255);
     font-weight: bold;

@@ -11,18 +11,58 @@ function useUsers() {
                 const res = await axios.get(`${API}/users`);
                 setUsers(res.data);
             }
-
+            
             catch (err) {
                 console.log(err);
             }
         };
 
         getUsers();
-        
     }, []);
 
-    return { users };
-}
+    const addUsers = async (user) => {
+        try {
+            await axios.post(`${API}/users`, user);
+
+            const res = await axios.get(`${API}/users`);
+            setUsers(res.data);
+        }
+
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+    const editUsers = async (user_id, user) => {
+        try {
+            await axios.put(`${API}/users/${user_id}`, user);
+            
+            const res = await axios.get(`${API}/users`);
+            setUsers(res.data);
+        }
+
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+    const deleteUsers = async (user_id) => {
+        try {
+            await axios.delete(`${API}/users/${user_id}`);
+            
+            const res = await axios.get(`${API}/users`);
+            setUsers(res.data);
+        }
+        
+        catch (err) {
+            console.log(err);
+        }
+        
+    };
+
+    return { users, addUsers, editUsers, deleteUsers };
+};
+
+
 
 export default useUsers;
-

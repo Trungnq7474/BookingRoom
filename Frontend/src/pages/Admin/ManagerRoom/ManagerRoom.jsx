@@ -6,6 +6,7 @@ import Pagination from "../../../components/Pagination/Pagination.jsx";
 import useAdd from "../../../hooks/useAdd.js";
 import useEdit from "../../../hooks/useEdit.js"
 import useDetail from "../../../hooks/useDetail.js";
+import useRooms from "../../../hooks/useRooms.js";
 
 
 function ManagerRoom() {
@@ -13,6 +14,7 @@ function ManagerRoom() {
     const { show, setShow } = useAdd();
     const { showEdit, setShowEdit } = useEdit();
     const { showDetail, setShowDetail } = useDetail();
+    const { rooms } = useRooms();
 
     return (
         <>
@@ -23,6 +25,7 @@ function ManagerRoom() {
                 <RoomTable 
                     onView={() => setShowDetail(true)}
                     onEdit={() => setShowEdit(true)}
+                    data={rooms}
                 />
 
                 <Pagination />

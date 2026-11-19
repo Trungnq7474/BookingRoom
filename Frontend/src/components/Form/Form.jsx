@@ -1,6 +1,6 @@
 import "./Form.css";
 
-function Form({ title, icon, onClose, buttonText, buttonIcon, width = "900px", children }) {
+function Form({ title, icon, onClose, onSubmit, buttonText, buttonIcon, width = "900px", children }) {
     return (
         <>
             <div className="common-form-overlay">
@@ -28,6 +28,7 @@ function Form({ title, icon, onClose, buttonText, buttonIcon, width = "900px", c
                         <button
                             type="button"
                             className="common-form-submit"
+                            onClick={onSubmit}
                         >
                             <i className={buttonIcon}></i> {buttonText}
                         </button>
