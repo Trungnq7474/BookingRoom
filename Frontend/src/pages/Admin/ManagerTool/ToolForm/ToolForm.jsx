@@ -1,7 +1,41 @@
+import { useState } from "react";
 import "./ToolForm.css";
 import Form from "../../../../components/Form/Form.jsx";
 
-function ToolForm({ onClose, isEdit }) {
+function ToolForm({ onClose, onAdd, onEdit, tool, isEdit }) {
+
+    const [toolname, setToolname] = useState(tool?.toolname || "");
+    const [status, setStatus] = useState(tool?.status || "");
+    const [tooltype, setTooltype] = useState(tool?.tooltype || "");
+    const [image, setImage] = useState(null);
+    const [description, setDescription] = useState(tool?.description || "");
+
+    const handleSubmit = async () => {
+        const formData = new FormData();
+
+        formData.append("toolname", toolname);
+        formData.append("roomname", "Phòng Server - H005");
+        formData.append("status", status);
+        formData.append("location", "Khu H");
+        formData.append("floor", "Tầng Trệt");
+        formData.append("tooltype", tooltype);
+        formData.append("description", description);
+
+        if(image) {
+            formData.append("image", image);
+        }
+
+        if(isEdit) {
+            await onEdit(tool.tool_id, formData);
+        }
+
+        else {
+            await onAdd(formData);
+        }
+
+        onClose();
+    }
+
     return (
         <>
             <Form
@@ -11,6 +45,7 @@ function ToolForm({ onClose, isEdit }) {
                     : "fa-solid fa-hard-drive"
                 }
                 onClose={onClose}
+                onSubmit={handleSubmit}
                 buttonText={isEdit ? "Cập Nhật" : "Thêm Thiết Bị"}
                 buttonIcon={isEdit
                     ? "fa-regular fa-pen-to-square"
@@ -25,12 +60,14 @@ function ToolForm({ onClose, isEdit }) {
                         <input
                             type="text"
                             placeholder="Nhập tên thiết bị..."
+                            value={toolname}
+                            onChange={(e) => setToolname(e.target.value)}
                         />
                     </div>
 
                     <div className="common-form-group">
                         <label>Trạng Thái</label>
-                        <select>
+                        <select value={status} onChange={(e) => setStatus(e.target.value)}>
                             <option value="">-- Chọn trạng thái --</option>
                             <option>Hoạt Động</option>
                             <option>Bảo Trì</option>
@@ -39,44 +76,27 @@ function ToolForm({ onClose, isEdit }) {
 
                     <div className="common-form-group">
                         <label>Loại Thiết Bị</label>
-                        <select>
-                            <option value="">-- Chọn loại thiết bị --</option>
-                            <option>Máy tính</option>
-                            <option>Máy chiếu</option>
-                            <option>Máy in</option>
-                            <option>Thiết bị mạng</option>
-                        </select>
+                        <input 
+                            type="text"
+                            placeholder="Nhập loại thiết bị..."
+                            value={tooltype}
+                            onChange={(e) => setTooltype(e.target.value)} 
+                        />
                     </div>
 
                     <div className="common-form-group">
                         <label>Tên Phòng</label>
-                        <select>
-                            <option value="">-- Chọn phòng --</option>
-                            <option>Phòng Máy - H003</option>
-                            <option>Phòng Máy - H004</option>
-                            <option>Phòng Máy - H509</option>
-                            <option>Phòng Thư Viện</option>
-                        </select>
+                        <input type="text" value="Phòng Server - H005" readOnly />
                     </div>
 
                     <div className="common-form-group">
                         <label>Tầng</label>
-                        <select>
-                            <option value="">-- Chọn tầng --</option>
-                            <option>Tầng Trệt</option>
-                            <option>Tầng 1</option>
-                            <option>Tầng 5</option>
-                        </select>
+                        <input type="text" value="Tầng Trệt" readOnly />
                     </div>
 
                     <div className="common-form-group">
                         <label>Khu Vực</label>
-                        <select>
-                            <option value="">-- Chọn khu vực --</option>
-                            <option>Khu H</option>
-                            <option>Khu I</option>
-                            <option>Khu K</option>
-                        </select>
+                        <input type="text" value="Khu H" readOnly />
                     </div>
 
                 </div>
@@ -87,7 +107,11 @@ function ToolForm({ onClose, isEdit }) {
                     <div className="common-form-upload">
                         <i className="fa-regular fa-image"></i>
                         <p>Chọn hình ảnh thiết bị</p>
-                        <input type="file" accept="image/*" />
+                        <input 
+                            type="file" 
+                            accept="image/*"
+                            onChange={(e) => setImage(e.target.files[0] || null)} 
+                        />
                     </div>
                 </div>
 
@@ -96,6 +120,8 @@ function ToolForm({ onClose, isEdit }) {
                     <textarea
                         rows="3"
                         placeholder="Nhập mô tả về thiết bị..."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                 </div>
 

@@ -12,9 +12,9 @@ import usePagination from "../../../hooks/usePagination.js";
 function ManagerTool() {
 
     const { show, setShow } = useForm();
-    const { showEdit, setShowEdit } = useEdit();
-    const { showDetail, setShowDetail } = useDetail();
-    const { tools } = useTools();
+    const { showEdit, setShowEdit, selectedItem, setSelectedItem } = useEdit();
+    const { showDetail, setShowDetail, selectedDetail, setSelectedDetail } = useDetail();
+    const { tools, addTools, editTools, deleteTools } = useTools();
     const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(tools);
 
     return (
@@ -24,8 +24,23 @@ function ManagerTool() {
             <section className="content">
 
                 <ToolTable 
-                    onView={() => setShowDetail(true)} 
-                    onEdit={() => setShowEdit(true)}
+                    onView={(item) => {
+                        setShowDetail(true)
+                        setSelectedDetail(item)
+                    }} 
+                    onEdit={(item) => {
+                        setShowEdit(true)
+                        setSelectedItem(item)
+                    }}
+                    onDelete={(item) => {
+                        const confirmDelete = window.confirm(
+                            `Bạn Có Chắc Chắn Muốn Xóa Thiết Bị "${item.toolname}" Không?`
+                        )
+
+                        if(confirmDelete) {
+                            deleteTools(item.tool_id);
+                        }
+                    }}
                     data={pages}
                 />
 
@@ -40,6 +55,7 @@ function ManagerTool() {
             {show ? 
                 <ToolForm 
                     onClose={() => setShow(false)}
+                    onAdd={addTools}
                     isEdit={false}
                 /> 
             : "" }
@@ -47,11 +63,18 @@ function ManagerTool() {
             {showEdit ?
                 <ToolForm 
                     onClose={() => setShowEdit(false)}
+                    onEdit={editTools}
+                    tool={selectedItem}
                     isEdit={true}
                 />
             : ""}
 
-            {showDetail ? <ToolDetail onClose={() => setShowDetail(false)} /> : "" }
+            {showDetail ? 
+                <ToolDetail 
+                    onClose={() => setShowDetail(false)}
+                    tool={selectedDetail} 
+                /> 
+            : "" }
 
         </>
     )

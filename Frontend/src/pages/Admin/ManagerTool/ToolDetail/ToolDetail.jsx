@@ -1,36 +1,58 @@
 import keyboard from "../../../../assets/Equitment/keyboard.png";
+import computer from "../../../../assets/Equitment/computer.png";
+import micro from "../../../../assets/Equitment/micro.png";
+import headphone from "../../../../assets/Equitment/headphone.png";
+import mouse from "../../../../assets/Equitment/mouse.png";
 import Detail from "../../../../components/Detail/Detail.jsx";
 
-function ToolDetail({ onClose }) {
+const toolImages = {
+    "keyboard.png" : keyboard,
+    "computer.png" : computer,
+    "micro.png" : micro,
+    "headphone.png" : headphone,
+    "mouse.png" : mouse
+};
+
+function ToolDetail({ onClose, tool }) {
+
+    const image = tool?.image?.startsWith("/uploads/")
+        ? `http://localhost:5000${tool.image}`
+        : toolImages[tool?.image];
+
     return (
         <>
             <Detail
-                image={keyboard}
-                title="Bàn Phím A4Tech KR-83"
-                status="Bảo Trì"
-                statusIcon="fa-solid fa-wrench"
-                statusColor="#1900ff"
+                image={image}
+                title={tool?.toolname}
+                status={tool?.status}
+                statusIcon={
+                    tool?.status === "Hoạt Động"
+                        ? "fa-solid fa-square-check"
+                        : "fa-solid fa-wrench"
+                }
+                statusColor={
+                    tool?.status === "Hoạt Động" ? "#26964b" : " #1900ff"
+                }
                 onClose={onClose}
             >
                 <div className="common-detail-item">
                     <i className="fa-solid fa-file-lines"></i>
                     <p>
-                        <b>Mô Tả:</b> Bàn phím được trang bị nhằm hỗ trợ soạn thảo văn bản 
-                        và thực hiện các thao tác điều khiển máy tính trong quá trình học tập và giảng dạy.
+                        <b>Mô Tả:</b> {tool?.description}
                     </p>
                 </div>
 
                 <div className="common-detail-item">
                     <i className="fa-solid fa-location-dot"></i>
                     <p>
-                        <b>Phòng Máy - H003 - Khu H - Tầng Trệt</b>
+                        <b>{tool?.roomname} - {tool?.location} - {tool?.floor}</b>
                     </p>
                 </div>
 
                 <div className="common-detail-item">
                     <i className="fa-solid fa-layer-group"></i>
                     <p>
-                        <b>Loại Thiết Bị:</b> Máy chiếu
+                        <b>Loại Thiết Bị:</b> {tool?.tooltype}
                     </p>
                 </div>
             </Detail>

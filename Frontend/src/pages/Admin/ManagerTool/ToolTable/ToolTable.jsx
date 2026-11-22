@@ -13,7 +13,7 @@ const toolImages = {
     "micro.png": micro,
 };
 
-function ToolTable({ data, onView, onEdit }) {
+function ToolTable({ data, onView, onDelete, onEdit }) {
 
     const columns = [
         { title: "STT", key: "tool_id" },
@@ -21,7 +21,13 @@ function ToolTable({ data, onView, onEdit }) {
         {   title: "Hình Ảnh", 
             key: "image",
             render: (image) => (
-                <img src={toolImages[image]} alt="Ảnh" className="common-image"/>
+                <img 
+                    src={
+                        image?.startsWith("/uploads/")
+                        ? `http://localhost:5000${image}`
+                        : toolImages[image]
+                    } 
+                    alt="Ảnh" className="common-image"/>
             )
         },
 
@@ -63,7 +69,8 @@ function ToolTable({ data, onView, onEdit }) {
         {
             label: "Xóa",
             icon: "fa-solid fa-trash-can",
-            className: "common-delete-button"
+            className: "common-delete-button",
+            onClick: onDelete
         }
     ];
 

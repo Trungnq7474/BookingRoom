@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import MainLayoutAdmin from "../layouts/MainLayoutAdmin.jsx";
 import DashBoard from "../pages/Admin/DashBoard/DashBoard.jsx";
 import ManagerUser from "../pages/Admin/ManagerUser/ManagerUser.jsx";
-import ManagerSupport from "../pages/Admin/ManagerSupport/ManagerSupport.jsx";
 import ManagerCalendar from "../pages/Admin/ManagerCalendar/ManagerCalendar.jsx";
 import ManagerRoom from "../pages/Admin/ManagerRoom/ManagerRoom.jsx";
 import ManagerTool from "../pages/Admin/ManagerTool/ManagerTool.jsx";
@@ -21,12 +20,6 @@ function AppRouters() {
             <Route path="/manageruser" element={
                 <MainLayoutAdmin>
                     <ManagerUser />
-                </MainLayoutAdmin>
-            } />
-
-            <Route path="/managersupport" element={
-                <MainLayoutAdmin>
-                    <ManagerSupport />
                 </MainLayoutAdmin>
             } />
 

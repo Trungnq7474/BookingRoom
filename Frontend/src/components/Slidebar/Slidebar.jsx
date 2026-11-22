@@ -49,11 +49,6 @@ function Slidebar() {
                         <i className="fa-regular fa-calendar-days"></i>
                         <span>Đăng Ký Lịch</span>
                     </NavLink>
-
-                    <NavLink to="/managersupport" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
-                        <i className="fa-solid fa-headset"></i>
-                        <span>Trợ Giúp</span>
-                    </NavLink>
                 </nav>
 
                 <button className="logout">
