@@ -5,12 +5,14 @@ import UserForm from "./UserForm/UserForm.jsx";
 import useAdd from "../../../hooks/useAdd.js";
 import useEdit from "../../../hooks/useEdit.js";
 import useUsers from "../../../hooks/useUsers.js";
+import usePagination from "../../../hooks/usePagination.js";
 
 function ManagerUser() {
 
     const { show, setShow } = useAdd();
-    const { showEdit, setShowEdit, selectedUser, setSelectedUser } = useEdit();
+    const { showEdit, setShowEdit, selectedItem, setSelectedItem } = useEdit();
     const { users, addUsers, editUsers, deleteUsers } = useUsers();
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(users);
 
     return (
         <>
@@ -20,7 +22,7 @@ function ManagerUser() {
 
                 <UserTable 
                     onEdit={(item) => {
-                        setSelectedUser(item);
+                        setSelectedItem(item);
                         setShowEdit(true);
                     }}
 
@@ -34,10 +36,14 @@ function ManagerUser() {
                         }
                     }}
 
-                    data={users}
+                    data={pages}
                 />
 
-                <Pagination />
+                <Pagination 
+                    pages={pagesNumber}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                />
 
             </section>
 
@@ -53,7 +59,7 @@ function ManagerUser() {
                 <UserForm 
                     onClose={() => setShowEdit(false)} 
                     onEdit={editUsers}
-                    user={selectedUser}
+                    user={selectedItem}
                     isEdit={true}
                 /> 
             : ""} 

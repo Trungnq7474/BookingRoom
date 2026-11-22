@@ -3,7 +3,7 @@ import AssignmentTable from "./AssignmentTable/AssignmentTable.jsx";
 import AssignmentForm from "./AssignmentForm/AssignmentForm.jsx";
 import AssignmentDetail from "./AssignmentDetail/AssignmentDetail.jsx";
 import AssignmentMaintenance from "./AssignmentMaintenance/AssignmentMaintenance.jsx";
-import Pagination from "../../../components/Pagination/Pagination.jsx";
+// import Pagination from "../../../components/Pagination/Pagination.jsx";
 import useAdd from "../../../hooks/useAdd.js";
 import useDetail from "../../../hooks/useDetail.js";
 
@@ -24,7 +24,7 @@ function ManagerAssignment() {
                     onSee={() => setShowMaintenance(true)}
                 />
 
-                <Pagination />
+                {/* <Pagination /> */}
 
             </section>
 

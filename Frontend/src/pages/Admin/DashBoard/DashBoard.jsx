@@ -1,7 +1,7 @@
 import BoardTitle from "./BoardTitle/BoardTitle.jsx";
 import BoardActive from "./BoardActive/BoardActive.jsx";
 import BoardTable from "./BoardTable/BoardTable.jsx";
-import Pagination from "../../../components/Pagination/Pagination.jsx";
+// import Pagination from "../../../components/Pagination/Pagination.jsx";
 
 function DashBoard() {
     return (
@@ -14,7 +14,7 @@ function DashBoard() {
 
                 <BoardTable />
 
-                <Pagination />
+                {/* <Pagination /> */}
 
             </section>
         </>

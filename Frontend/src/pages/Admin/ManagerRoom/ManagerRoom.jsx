@@ -7,14 +7,16 @@ import useAdd from "../../../hooks/useAdd.js";
 import useEdit from "../../../hooks/useEdit.js"
 import useDetail from "../../../hooks/useDetail.js";
 import useRooms from "../../../hooks/useRooms.js";
+import usePagination from "../../../hooks/usePagination.js";
 
 
 function ManagerRoom() {
 
     const { show, setShow } = useAdd();
-    const { showEdit, setShowEdit } = useEdit();
-    const { showDetail, setShowDetail } = useDetail();
-    const { rooms } = useRooms();
+    const { showEdit, setShowEdit, selectedItem, setSelectedItem } = useEdit();
+    const { showDetail, setShowDetail, selectedDetail, setSelectedDetail } = useDetail();
+    const { rooms, addRooms, editRooms, deleteRooms } = useRooms();
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(rooms);
 
     return (
         <>
@@ -23,18 +25,38 @@ function ManagerRoom() {
             <section className="content">
 
                 <RoomTable 
-                    onView={() => setShowDetail(true)}
-                    onEdit={() => setShowEdit(true)}
-                    data={rooms}
+                    onView={(item) => {
+                        setSelectedDetail(item);
+                        setShowDetail(true);
+                    }}
+                    onEdit={(item) => {
+                        setSelectedItem(item);
+                        setShowEdit(true);
+                    }}
+                    onDelete={(item) => {
+                        const confirmDelete = window.confirm(
+                            `Bạn Có Chắc Chắn Muốn Xóa Phòng "${item.roomname}" Không?`
+                        )
+
+                        if(confirmDelete) {
+                            deleteRooms(item.room_id);
+                        }
+                    }}
+                    data={pages}
                 />
 
-                <Pagination />
+                <Pagination
+                    pages={pagesNumber}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                />
 
             </section>
 
             {show ? 
                 <RoomForm 
                     onClose={() => setShow(false)}
+                    onAdd={addRooms}
                     isEdit={false}
                 /> 
             : ""}
@@ -42,11 +64,18 @@ function ManagerRoom() {
             {showEdit ? 
                 <RoomForm 
                     onClose={() => setShowEdit(false)}
+                    onEdit={editRooms}
+                    room={selectedItem}
                     isEdit={true}
                 />
             : ""}
             
-            {showDetail ? <RoomDetail onClose={() => setShowDetail(false)}/> : ""}
+            {showDetail ? 
+                <RoomDetail 
+                    onClose={() => setShowDetail(false)}
+                    room={selectedDetail}
+                /> 
+            : ""}
 
         </>
     )

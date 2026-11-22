@@ -1,6 +1,6 @@
 import SupportTitle from "./SupportTitle/SupportTitle.jsx";
 import SupportTable from "./SupportTable/SupportTable.jsx";
-import Pagination from "../../../components/Pagination/Pagination.jsx";
+// import Pagination from "../../../components/Pagination/Pagination.jsx";
 
 
 function ManagerSupport() {
@@ -12,7 +12,7 @@ function ManagerSupport() {
 
                 <SupportTable />
 
-                <Pagination />
+                {/* <Pagination /> */}
 
             </section>
 

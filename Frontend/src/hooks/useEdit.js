@@ -2,9 +2,9 @@ import { useState } from "react";
 
 function useEdit() {
     const [showEdit, setShowEdit] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
 
-    return { showEdit, setShowEdit, selectedUser, setSelectedUser };
+    return { showEdit, setShowEdit, selectedItem, setSelectedItem };
 }
 
 export default useEdit;

@@ -112,7 +112,7 @@
 }
 
 .common-form-upload {
-    min-height: 115px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -126,7 +126,7 @@
 
 .common-form-upload i {
     font-size: 26px;
-    margin-top: 25px;
+    margin-top: 13px;
 }
 
 .common-form-upload p {

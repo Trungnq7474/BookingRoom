@@ -7,6 +7,7 @@ import useForm from "../../../hooks/useAdd.js"
 import useEdit from "../../../hooks/useEdit.js"
 import useDetail from "../../../hooks/useDetail.js"
 import useTools from "../../../hooks/useTools.js";
+import usePagination from "../../../hooks/usePagination.js";
 
 function ManagerTool() {
 
@@ -14,6 +15,7 @@ function ManagerTool() {
     const { showEdit, setShowEdit } = useEdit();
     const { showDetail, setShowDetail } = useDetail();
     const { tools } = useTools();
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(tools);
 
     return (
         <>
@@ -24,10 +26,14 @@ function ManagerTool() {
                 <ToolTable 
                     onView={() => setShowDetail(true)} 
                     onEdit={() => setShowEdit(true)}
-                    data={tools}
+                    data={pages}
                 />
 
-                <Pagination />
+                <Pagination
+                    pages={pagesNumber}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                />
 
             </section>
 

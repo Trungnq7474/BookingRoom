@@ -15,7 +15,7 @@ const roomImages = {
     "I101.png": I101
 };
 
-function RoomTable({ data, onView, onEdit }) {
+function RoomTable({ data, onView, onDelete, onEdit }) {
 
     const columns = [
         { title: "STT", key: "room_id" },
@@ -23,17 +23,22 @@ function RoomTable({ data, onView, onEdit }) {
         {   title: "Hình Ảnh", 
             key: "image",
             render: (image) => (
-                <img src={roomImages[image]} alt="Ảnh" className="common-image"/>
+                <img 
+                    src={
+                        image?.startsWith("/uploads/")
+                        ? `http://localhost:5000${image}`
+                        : roomImages[image]
+                    } 
+                    alt="Ảnh" className="common-image"/>
             )
         },
 
         { title: "Tên Phòng", key: "roomname" },
 
-        { title: "Khu Vực", key: "location" },
-
-        { title: "Tầng", key: "floor" },
-
-        { title: "Sức Chứa", key: "capacity" },
+        {   title: "Sức Chứa", 
+            key: "capacity",
+            render: (value) => `${value} máy` 
+        },
 
         {
             title: "Trạng Thái",
@@ -69,7 +74,8 @@ function RoomTable({ data, onView, onEdit }) {
         {
             label: "Xóa",
             icon: "fa-solid fa-trash-can",
-            className: "common-delete-button"
+            className: "common-delete-button",
+            onClick: onDelete
         }
     ];
 
