@@ -13,6 +13,7 @@ function CalendarTitle() {
                         <option value="">Loại đăng ký</option>
                         <option value="Thiết Bị">Thiết Bị</option>
                         <option value="Phòng Máy">Phòng Máy</option>
+                        <option value="Phòng Thư Viện">Phòng Thư Viện</option>
                     </select>
 
                     <i className="fa-solid fa-chevron-down"></i>
@@ -24,6 +25,7 @@ function CalendarTitle() {
                         <option value="Chờ Duyệt">Chờ Duyệt</option>
                         <option value="Đang Sử Dụng">Đang Sử Dụng</option>
                         <option value="Đã Sử Dụng">Đã Sử Dụng</option>
+                        <option value="Đã Từ Chối">Đã Từ Chối</option>
                     </select>
 
                     <i className="fa-solid fa-chevron-down"></i>

@@ -1,17 +1,5 @@
 import Table from "../../../../components/Table/Table.jsx";
-import computer from "../../../../assets/Equitment/computer.png";
-import headphone from "../../../../assets/Equitment/headphone.png";
-import keyboard from "../../../../assets/Equitment/keyboard.png";
-import mouse from "../../../../assets/Equitment/mouse.png";
-import micro from "../../../../assets/Equitment/micro.png";
-
-const toolImages = {
-    "computer.png": computer,
-    "headphone.png": headphone,
-    "keyboard.png": keyboard,
-    "mouse.png": mouse,
-    "micro.png": micro,
-};
+import commonImages from "../../../../utils/commonImages.js";
 
 function ToolTable({ data, onView, onDelete, onEdit }) {
 
@@ -25,7 +13,7 @@ function ToolTable({ data, onView, onDelete, onEdit }) {
                     src={
                         image?.startsWith("/uploads/")
                         ? `http://localhost:5000${image}`
-                        : toolImages[image]
+                        : commonImages[image]
                     } 
                     alt="Ảnh" className="common-image"/>
             )
@@ -40,7 +28,7 @@ function ToolTable({ data, onView, onDelete, onEdit }) {
             key: "status",
             render: (value) => (
                 <span className={
-                    value === "Hoạt Động" ? "common-status-active" : "common-status-maintenance"
+                    value === "Hoạt Động" ? "common-status-completed" : "common-status-active"
                 }>
                     <i className={
                         value === "Hoạt Động" ? "fa-solid fa-square-check" : "fa-solid fa-wrench"

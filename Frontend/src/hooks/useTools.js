@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import API from "../services/api";
+import { getTool, addTool, editTool, deleteTool } from "../services/toolsService.js";
 
 function useTools() {
     const [tools, setTools] = useState([]);
@@ -8,7 +7,7 @@ function useTools() {
     useEffect(() => {
         const getTools = async () => {
             try {
-                const res = await axios.get(`${API}/tools`);
+                const res = await getTool();
                 setTools(res.data);
             }
 
@@ -22,9 +21,9 @@ function useTools() {
 
     const addTools = async (tool) => {
         try {
-            await axios.post(`${API}/tools`, tool);
+            await addTool(tool);
 
-            const res = await axios.get(`${API}/tools`);
+            const res = await getTool();
             setTools(res.data);
         }
 
@@ -35,9 +34,9 @@ function useTools() {
 
     const editTools = async (tool_id, tool) => {
         try {
-            await axios.put(`${API}/tools/${tool_id}`, tool);
+            await editTool(tool_id, tool);
 
-            const res = await axios.get(`${API}/tools`);
+            const res = await getTool();
             setTools(res.data);
         }
 
@@ -48,9 +47,9 @@ function useTools() {
 
     const deleteTools = async (tool_id) => {
         try {
-            await axios.delete(`${API}/tools/${tool_id}`);
+            await deleteTool(tool_id);
 
-            const res = await axios.get(`${API}/tools`);
+            const res = await getTool();
             setTools(res.data);
         }
 

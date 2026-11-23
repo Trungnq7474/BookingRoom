@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import API from "../services/api";
+import { getRoom, addRoom, editRoom, deleteRoom } from "../services/roomsService.js";
 
 function useRooms() {
     const [rooms, setRooms] = useState([]);
@@ -8,7 +7,7 @@ function useRooms() {
     useEffect(() => {
         const getRooms = async () => {
             try {
-                const res = await axios.get(`${API}/rooms`);
+                const res = await getRoom();
                 setRooms(res.data);
             }
 
@@ -22,9 +21,9 @@ function useRooms() {
 
     const addRooms = async (room) => {
         try {
-            await axios.post(`${API}/rooms`, room);
+            await addRoom(room);
 
-            const res = await axios.get(`${API}/rooms`);
+            const res = await getRoom();
             setRooms(res.data);
         }
 
@@ -35,9 +34,9 @@ function useRooms() {
 
     const editRooms = async (room_id, room) => {
         try {
-            await axios.put(`${API}/rooms/${room_id}`, room);
+            await editRoom(room_id, room);
 
-            const res = await axios.get(`${API}/rooms`);
+            const res = await getRoom();
             setRooms(res.data);
         }
 
@@ -48,9 +47,9 @@ function useRooms() {
 
     const deleteRooms = async (room_id) => {
         try {
-            await axios.delete(`${API}/rooms/${room_id}`);
+            await deleteRoom(room_id);
 
-            const res = await axios.get(`${API}/rooms`);
+            const res = await getRoom();
             setRooms(res.data);
         }
 

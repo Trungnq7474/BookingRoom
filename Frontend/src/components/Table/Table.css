@@ -128,7 +128,8 @@
 .common-status-received,
 .common-status-using,
 .common-status-active,
-.common-status-maintenance {
+.common-status-completed,
+.common-status-rejected {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -149,11 +150,15 @@
 }
 
 .common-status-active {
+    background: #1900ff;
+}
+
+.common-status-completed {
     background: #26964b;
 }
 
-.common-status-maintenance {
-    background: #1900ff;
+.common-status-rejected {
+    background: rgb(217, 0, 22);
 }
 
 

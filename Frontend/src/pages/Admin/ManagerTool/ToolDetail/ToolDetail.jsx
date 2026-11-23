@@ -1,23 +1,11 @@
-import keyboard from "../../../../assets/Equitment/keyboard.png";
-import computer from "../../../../assets/Equitment/computer.png";
-import micro from "../../../../assets/Equitment/micro.png";
-import headphone from "../../../../assets/Equitment/headphone.png";
-import mouse from "../../../../assets/Equitment/mouse.png";
 import Detail from "../../../../components/Detail/Detail.jsx";
-
-const toolImages = {
-    "keyboard.png" : keyboard,
-    "computer.png" : computer,
-    "micro.png" : micro,
-    "headphone.png" : headphone,
-    "mouse.png" : mouse
-};
+import commonImages from "../../../../utils/commonImages.js";
 
 function ToolDetail({ onClose, tool }) {
 
     const image = tool?.image?.startsWith("/uploads/")
         ? `http://localhost:5000${tool.image}`
-        : toolImages[tool?.image];
+        : commonImages[tool?.image];
 
     return (
         <>

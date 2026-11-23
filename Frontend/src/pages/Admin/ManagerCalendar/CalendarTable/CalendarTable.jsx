@@ -1,17 +1,21 @@
 import Table from "../../../../components/Table/Table.jsx";
 
-function CalendarTable({ onView }) {
+function CalendarTable({ onView, data, onDelete }) {
 
     const columns = [
-        { title: "STT", key: "stt" },
+        { title: "STT", key: "booking_id" },
 
-        { title: "Họ Và Tên", key: "name" },
+        { title: "Họ Và Tên", key: "full_name" },
 
         {
             title: "Vai Trò",
             key: "role",
             render: (value, item) => (
-                <span className={item.roleClass}>
+                <span className={
+                    item.role === "Sinh Viên"
+                        ? "common-student"
+                        : "common-teacher"
+                }>
                     {value}
                 </span>
             )
@@ -22,58 +26,28 @@ function CalendarTable({ onView }) {
         {
             title: "Trạng Thái",
             key: "status",
-            render: (value, item) => (
-                <span className={item.statusClass}>
-                    <i className={item.statusIcon}></i>
+            render: (value) => (
+                <span className={
+                    value === "Chờ Duyệt"
+                    ? "common-status-pending"
+                    : value === "Đang Sử Dụng"
+                    ? "common-status-active"
+                    : value === "Đã Sử Dụng"
+                    ? "common-status-completed"
+                    : "common-status-rejected"
+                }>
+                    <i className={
+                        value === "Chờ Duyệt"
+                        ? "fa-regular fa-clock"
+                        : value === "Đang Sử Dụng"
+                        ? "fa-solid fa-gear"
+                        : value === "Đã Sử Dụng"
+                        ? "fa-solid fa-square-check"
+                        : "fa-solid fa-xmark"
+                    }></i>
                     {value}
                 </span>
             )
-        }
-    ];
-
-    const data = [
-        {
-            stt: "#001",
-            name: "Nguyễn Văn A",
-            role: "Sinh Viên",
-            roleClass: "common-student",
-            type: "Thiết Bị",
-            status: "Chờ Duyệt",
-            statusClass: "common-status-pending",
-            statusIcon: "fa-regular fa-clock"
-        },
-
-        {
-            stt: "#002",
-            name: "Nguyễn Văn B",
-            role: "Giảng Viên",
-            roleClass: "common-teacher",
-            type: "Phòng Máy",
-            status: "Đã Sử Dụng",
-            statusClass: "common-status-active",
-            statusIcon: "fa-solid fa-square-check"
-        },
-
-        {
-            stt: "#003",
-            name: "Nguyễn Thị C",
-            role: "Sinh Viên",
-            roleClass: "common-student",
-            type: "Thiết Bị",
-            status: "Đang Sử Dụng",
-            statusClass: "common-status-maintenance",
-            statusIcon: "fa-solid fa-gear"
-        },
-
-        {
-            stt: "#004",
-            name: "Phạm Văn D",
-            role: "Giảng Viên",
-            roleClass: "common-teacher",
-            type: "Phòng Máy",
-            status: "Chờ Duyệt",
-            statusClass: "common-status-pending",
-            statusIcon: "fa-regular fa-clock"
         }
     ];
 
@@ -88,7 +62,8 @@ function CalendarTable({ onView }) {
         {
             label: "Xóa",
             icon: "fa-regular fa-trash-can",
-            className: "common-delete-button"
+            className: "common-delete-button",
+            onClick: onDelete
         }
     ];
 

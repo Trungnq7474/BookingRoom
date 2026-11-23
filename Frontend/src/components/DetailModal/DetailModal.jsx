@@ -1,6 +1,6 @@
 import "./DetailModal.css";
 
-function DetailModal({ onClose, image, status, name, title, information, registration, showButtons = false, statusClass = "" }) {
+function DetailModal({ onClose, image, status, name, title, statusIcon, information, registration, showButtons = false, statusClass }) {
     return (
         <>
             <div className="detail-overlay">
@@ -21,7 +21,7 @@ function DetailModal({ onClose, image, status, name, title, information, registr
                             <div className="detail-info">
 
                                 <span className={`detail-status ${statusClass}`}>
-                                    <i className="fa-regular fa-clock"></i>
+                                    <i className={statusIcon}></i>
                                     {status}
                                 </span>
 

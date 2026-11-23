@@ -1,26 +1,12 @@
 import Detail from "../../../../components/Detail/Detail.jsx";
-import H003 from "../../../../assets/Room/H003.jpg";
-import H509 from "../../../../assets/Room/H509.jpg";
-import library from "../../../../assets/Room/library.jpg";
-import I001 from "../../../../assets/Room/I001.jpg";
-import I002 from "../../../../assets/Room/I002.jpg";
-import I101 from "../../../../assets/Room/I101.png";
-
-const roomImages = {
-    "H003.jpg": H003,
-    "H509.jpg": H509,
-    "library.jpg": library,
-    "I001.jpg": I001,
-    "I002.jpg": I002,
-    "I101.png": I101
-};
+import commonImages from "../../../../utils/commonImages.js";
 
 
 function RoomDetail({ onClose, room }) {
 
     const image = room?.image?.startsWith("/uploads/")
         ? `http://localhost:5000${room.image}`
-        : roomImages[room?.image];
+        : commonImages[room?.image];
 
     return (
         <>
