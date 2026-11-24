@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getBooking, deleteBooking } from "../services/bookingsService.js";
+import { getBooking, deleteBooking, approveBooking, rejectBooking } from "../services/bookingsService.js";
 
 function useBookings() {
     const [bookings, setBookings] = useState([]);
@@ -30,9 +30,35 @@ function useBookings() {
         catch (err) {
             console.log(err);
         }
-    }
+    };
 
-    return { bookings, deleteBookings };
+    const approveBookings = async (booking_id) => {
+        try {
+            await approveBooking(booking_id);
+
+            const res = await getBooking();
+            setBookings(res.data);
+        }
+
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+    const rejectBookings = async (booking_id) => {
+        try {
+            await rejectBooking(booking_id);
+
+            const res = await getBooking();
+            setBookings(res.data);
+        }
+
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+    return { bookings, deleteBookings, approveBookings, rejectBookings };
 };
 
 export default useBookings;

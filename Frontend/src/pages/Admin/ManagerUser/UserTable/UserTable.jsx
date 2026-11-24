@@ -3,7 +3,11 @@ import Table from "../../../../components/Table/Table.jsx";
 function UserTable({ data, onEdit, onDelete }) {
 
         const columns = [
-            { title: "STT", key: "user_id" },
+            { 
+                title: "STT", 
+                key: "user_id",
+                render: (value) => `#00${value}` 
+            },
 
             { title: "Mã Số", key: "user_code" },
 

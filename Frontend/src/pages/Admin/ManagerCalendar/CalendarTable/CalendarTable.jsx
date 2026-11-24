@@ -3,7 +3,11 @@ import Table from "../../../../components/Table/Table.jsx";
 function CalendarTable({ onView, data, onDelete }) {
 
     const columns = [
-        { title: "STT", key: "booking_id" },
+        { 
+            title: "STT", 
+            key: "booking_id",
+            render: (value) => `#00${value}` 
+        },
 
         { title: "Họ Và Tên", key: "full_name" },
 
@@ -34,16 +38,20 @@ function CalendarTable({ onView, data, onDelete }) {
                     ? "common-status-active"
                     : value === "Đã Sử Dụng"
                     ? "common-status-completed"
+                    : value === "Đã Duyệt"
+                    ? "common-status-received"
                     : "common-status-rejected"
                 }>
                     <i className={
                         value === "Chờ Duyệt"
-                        ? "fa-regular fa-clock"
+                        ? "fa-solid fa-clock"
                         : value === "Đang Sử Dụng"
                         ? "fa-solid fa-gear"
                         : value === "Đã Sử Dụng"
                         ? "fa-solid fa-square-check"
-                        : "fa-solid fa-xmark"
+                        : value === "Đã Duyệt"
+                        ? "fa-solid fa-circle-check"
+                        : "fa-solid fa-circle-xmark"
                     }></i>
                     {value}
                 </span>

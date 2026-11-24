@@ -23,6 +23,7 @@ function CalendarTitle() {
                     <select defaultValue="">
                         <option value="">Trạng Thái</option>
                         <option value="Chờ Duyệt">Chờ Duyệt</option>
+                        <option value="Đã Duyệt">Đã Duyệt</option>
                         <option value="Đang Sử Dụng">Đang Sử Dụng</option>
                         <option value="Đã Sử Dụng">Đã Sử Dụng</option>
                         <option value="Đã Từ Chối">Đã Từ Chối</option>

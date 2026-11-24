@@ -55,8 +55,7 @@ function useUsers() {
         
         catch (err) {
             console.log(err);
-        }
-        
+        }  
     };
 
     return { users, addUsers, editUsers, deleteUsers };

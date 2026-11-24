@@ -4,7 +4,11 @@ import commonImages from "../../../../utils/commonImages.js";
 function ToolTable({ data, onView, onDelete, onEdit }) {
 
     const columns = [
-        { title: "STT", key: "tool_id" },
+        { 
+            title: "STT", 
+            key: "tool_id",
+            render: (value) => `#00${value}`
+        },
 
         {   title: "Hình Ảnh", 
             key: "image",

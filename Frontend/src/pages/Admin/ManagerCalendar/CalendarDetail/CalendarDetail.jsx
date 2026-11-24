@@ -1,7 +1,7 @@
 import DetailModal from "../../../../components/DetailModal/DetailModal.jsx";
 import commonImages from "../../../../utils/commonImages.js";
 
-function CalendarDetail({ onClose, booking }) {
+function CalendarDetail({ onClose, booking, onApprove, onReject }) {
     return (
         <>
             <DetailModal
@@ -13,12 +13,14 @@ function CalendarDetail({ onClose, booking }) {
                 status={booking?.status}
                 statusIcon={
                     booking?.status === "Chờ Duyệt"
-                    ? "fa-regular fa-clock"
+                    ? "fa-solid fa-clock"
                     : booking?.status === "Đang Sử Dụng"
                     ? "fa-solid fa-gear"
                     : booking?.status === "Đã Sử Dụng"
                     ? "fa-solid fa-square-check"
-                    : "fa-solid fa-xmark"
+                    : booking?.status === "Đã Duyệt"
+                    ? "fa-solid fa-circle-check"
+                    : "fa-solid fa-circle-xmark"
                 }
                 statusClass={
                     booking?.status === "Chờ Duyệt"
@@ -27,11 +29,15 @@ function CalendarDetail({ onClose, booking }) {
                     ? "active"
                     : booking?.status === "Đã Sử Dụng"
                     ? "completed"
+                    : booking?.status === "Đã Duyệt"
+                    ? "received"
                     : "rejected"
                 }
                 name={booking?.name}
                 title="Thông Tin Đăng Ký"
                 showButtons={true}
+                onApprove={() => onApprove(booking?.booking_id)}
+                onReject={() => onReject(booking?.booking_id)}
 
                 information={
                     <>

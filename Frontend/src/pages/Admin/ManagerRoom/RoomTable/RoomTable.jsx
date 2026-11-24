@@ -4,7 +4,11 @@ import commonImages from "../../../../utils/commonImages.js";
 function RoomTable({ data, onView, onDelete, onEdit }) {
 
     const columns = [
-        { title: "STT", key: "room_id" },
+        { 
+            title: "STT", 
+            key: "room_id",
+            render: (value) => `#00${value}` 
+        },
 
         {   title: "Hình Ảnh", 
             key: "image",

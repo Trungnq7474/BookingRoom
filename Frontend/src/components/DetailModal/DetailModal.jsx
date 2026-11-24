@@ -1,6 +1,6 @@
 import "./DetailModal.css";
 
-function DetailModal({ onClose, image, status, name, title, statusIcon, information, registration, showButtons = false, statusClass }) {
+function DetailModal({ onClose, image, status, name, title, statusIcon, information, registration, showButtons = false, statusClass, onApprove, onReject }) {
     return (
         <>
             <div className="detail-overlay">
@@ -43,15 +43,15 @@ function DetailModal({ onClose, image, status, name, title, statusIcon, informat
                             </div>
                         </div>
 
-                        {showButtons ? (
+                        {showButtons && status === "Chờ Duyệt" ? (
                             <div className="detail-buttons">
 
-                                <button>
+                                <button onClick={onApprove}>
                                     <i className="fa-solid fa-check"></i>
                                     Duyệt
                                 </button>
 
-                                <button>
+                                <button onClick={onReject}> 
                                     <i className="fa-solid fa-xmark"></i>
                                     Từ Chối
                                 </button>

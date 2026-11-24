@@ -129,7 +129,8 @@
 .common-status-using,
 .common-status-active,
 .common-status-completed,
-.common-status-rejected {
+.common-status-rejected,
+.common-status-pendingg {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -159,6 +160,10 @@
 
 .common-status-rejected {
     background: rgb(217, 0, 22);
+}
+
+.common-status-pendingg {
+    background: #36c000;
 }
 
 

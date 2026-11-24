@@ -134,16 +134,37 @@
     background: #26964b;
 }
 
+.detail-status.received {
+    background: #657765;
+}
+
 .detail-status.rejected {
     background: rgb(217, 0, 22);
 }
 
-.detail-status.assignment-status {
+.detail-status.pending-status {
     top: -28px;
+    background: #ff891e;
 }
 
-.detail-status.maintenance-status {
+.detail-status.active-status {
     top: -28px;
+    background: #1900ff;
+}
+
+.detail-status.completed-status {
+    top: -28px;
+    background: #26964b;
+}
+
+.detail-status.received-status {
+    top: -28px;
+    background: #657765;
+}
+
+.detail-status.pendingg-status {
+    top: -28px;
+    background: #36c000;
 }
 
 .detail-registration {

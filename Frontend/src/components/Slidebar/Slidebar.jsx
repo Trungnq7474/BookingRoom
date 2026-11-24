@@ -31,8 +31,8 @@ function Slidebar() {
                     </NavLink>
 
                     <NavLink to="/managerassignment" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
-                        <i className="fa-solid fa-screwdriver-wrench"></i>
-                        <span>Phân Công Sự Cố</span>
+                        <i className="fa-solid fa-triangle-exclamation"></i>
+                        <span>Sự Cố</span>
                     </NavLink>
 
                     <NavLink to="/managerroom" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
@@ -49,6 +49,12 @@ function Slidebar() {
                         <i className="fa-regular fa-calendar-days"></i>
                         <span>Đăng Ký Lịch</span>
                     </NavLink>
+
+                    <NavLink to="/managermaintenance" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
+                        <i className="fa-solid fa-screwdriver-wrench"></i>
+                        <span>Bảo Trì</span>
+                    </NavLink>
+                    
                 </nav>
 
                 <button className="logout">

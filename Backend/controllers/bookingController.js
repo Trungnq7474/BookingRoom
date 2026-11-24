@@ -10,27 +10,27 @@ const getBooking = async (req, res) => {
                 u.role,
 
                 CASE
-                    WHEN b.type = 'Thiết Bị' THEN t.toolname
+                    WHEN b.tool_id IS NOT NULL THEN t.toolname
                     ELSE r.roomname
                 END AS name,
 
                 CASE
-                    WHEN b.type = 'Thiết Bị' THEN t.roomname
+                    WHEN b.tool_id IS NOT NULL THEN t.roomname
                     ELSE r.roomname
                 END AS room_name,
 
                 CASE
-                    WHEN b.type = 'Thiết Bị' THEN t.location
+                    WHEN b.tool_id IS NOT NULL THEN t.location
                     ELSE r.location
                 END AS location,
 
                 CASE
-                    WHEN b.type = 'Thiết Bị' THEN t.floor
+                    WHEN b.tool_id IS NOT NULL THEN t.floor
                     ELSE r.floor
                 END AS floor,
 
                 CASE 
-                    WHEN b.type = 'Thiết Bị' THEN t.image
+                    WHEN b.tool_id IS NOT NULL THEN t.image
                     ELSE r.image
                 END AS booking_image
                 
@@ -65,4 +65,42 @@ const deleteBooking = async (req, res) => {
     }
 };
 
-module.exports = { getBooking, deleteBooking };
+const approveBooking = async (req, res) => {
+    try {
+        const { booking_id } = req.params;
+
+        await db.promise().query(
+            `UPDATE bookings SET
+            status = "Đã Duyệt"
+            WHERE booking_id = ?`,
+            [booking_id]
+        );
+
+        res.json({ message: "Duyệt Đăng Ký Thành Công !" });
+    }
+
+    catch (err) {
+        res.send(err.message);
+    }
+};
+
+const rejectBooking = async (req, res) => {
+    try {
+        const { booking_id } = req.params;
+
+        await db.promise().query(
+            `UPDATE bookings SET
+            status = "Đã Từ Chối"
+            WHERE booking_id = ?`,
+            [booking_id]
+        );
+
+        res.json({ message: "Đã Từ Chối Đăng Ký Thành Công !" });
+    }
+
+    catch (err) {
+        res.send(err.message);
+    }
+};
+
+module.exports = { getBooking, deleteBooking, approveBooking, rejectBooking };

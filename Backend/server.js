@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes.js");
 const roomRoutes = require("./routes/roomRoutes.js");
 const toolRoutes = require("./routes/toolRoutes.js");
 const bookingRoutes = require("./routes/bookingRoutes.js");
+const incidentRoutes = require("./routes/incidentRoutes.js");
 
 const app = express();
 const path = require("path");
@@ -19,6 +20,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/tools", toolRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/incidents", incidentRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend Đang Hoạt Động !");
