@@ -80,7 +80,18 @@ function CalendarDetail({ onClose, booking, onApprove, onReject }) {
 
                             <p>
                                 <i className="fa-regular fa-id-card"></i>
-                                <span><b>Vai Trò:</b> <strong>{booking?.role}</strong></span>
+                                <span>
+                                    <b>Vai Trò: </b>
+                                    <strong className={
+                                            booking?.role === "Sinh Viên"
+                                            ? "common-student"
+                                            : booking?.role === "Giảng Viên"
+                                            ? "common-teacher"
+                                            : ""
+                                    }>
+                                        {booking?.role}
+                                    </strong>
+                                </span>
                             </p>
 
                             <p>
@@ -99,6 +110,18 @@ function CalendarDetail({ onClose, booking, onApprove, onReject }) {
                                 <i className="fa-regular fa-bookmark"></i>
                                 <span><b>Mục Đích Sử Dụng:</b> {booking?.purpose}</span>
                             </p>
+
+                            {booking?.status === "Đã Từ Chối"
+                                ? <p>
+                                    <i className="fa-solid fa-calendar-xmark"></i>
+                                    <span>
+                                        <b>Thời Gian Từ Chối:</b> {booking?.rejection_time
+                                            ? new Date(booking?.rejection_time).toLocaleString("vi-VN")
+                                            : ""}
+                                    </span>
+                                </p>
+                                : ""
+                            }
                         </div>
 
                     </div>

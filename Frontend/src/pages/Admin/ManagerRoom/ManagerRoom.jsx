@@ -8,7 +8,8 @@ import useEdit from "../../../hooks/useEdit.js"
 import useDetail from "../../../hooks/useDetail.js";
 import useRooms from "../../../hooks/useRooms.js";
 import usePagination from "../../../hooks/usePagination.js";
-
+import useSearch from "../../../hooks/useSearch.js";
+import useFilter from "../../../hooks/useFilter.js";
 
 function ManagerRoom() {
 
@@ -16,11 +17,22 @@ function ManagerRoom() {
     const { showEdit, setShowEdit, selectedItem, setSelectedItem } = useEdit();
     const { showDetail, setShowDetail, selectedDetail, setSelectedDetail } = useDetail();
     const { rooms, addRooms, editRooms, deleteRooms } = useRooms();
-    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(rooms);
+    const { search, setSearch, filteredData: searchedData } = useSearch(
+        rooms,
+        ["roomname"]
+    );
+    const { filters, setFilters, filteredData } = useFilter(searchedData);
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(filteredData);
 
     return (
         <>
-            <RoomTitle onAdd={() => setShow(true)}/>
+            <RoomTitle 
+                onAdd={() => setShow(true)}
+                onSearch={setSearch}
+                search={search}
+                filters={filters}
+                setFilters={setFilters}
+            />
 
             <section className="content">
 

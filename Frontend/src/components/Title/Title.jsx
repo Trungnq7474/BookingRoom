@@ -1,6 +1,6 @@
 import "./Title.css";
 
-function Title({ icon, title, placeholder, buttonText, onAdd, children }) {
+function Title({ icon, title, placeholder, buttonText, onAdd, children, search, onSearch }) {
     return (
         <>
             <div className="page-title">
@@ -10,7 +10,12 @@ function Title({ icon, title, placeholder, buttonText, onAdd, children }) {
 
             <div className="toolbar">
                 <div className="search-box">
-                    <input type="text" placeholder={placeholder} />
+                    <input
+                        type="text"
+                        placeholder={placeholder}
+                        value={search || ""}
+                        onChange={(e) => onSearch?.(e.target.value)}
+                    />
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
 

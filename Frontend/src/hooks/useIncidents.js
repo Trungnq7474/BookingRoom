@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getIncident, deleteIncident } from "../services/incidentsService.js";
+import { getIncident, deleteIncident, assignIncident } from "../services/incidentsService.js";
 
 function useIncidents() {
     const [incidents, setIncidents] = useState([]);
@@ -31,8 +31,22 @@ function useIncidents() {
                 console.log(err);
             }  
         };
+    
+    const assignIncidents = async (incident_id, employment) => {
+        try {
+            await assignIncident(incident_id, employment);
 
-    return { incidents, deleteIncidents };
+            const res = await getIncident();
+            setIncidents(res.data);
+
+        } 
+        
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+    return { incidents, deleteIncidents, assignIncidents };
 }
 
 export default useIncidents;

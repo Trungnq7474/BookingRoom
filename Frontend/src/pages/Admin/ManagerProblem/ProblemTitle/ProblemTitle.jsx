@@ -1,15 +1,18 @@
 import Title from "../../../../components/Title/Title.jsx";
 
-function ProblemTitle() {
+function ProblemTitle({ search, onSearch, filters, setFilters }) {
     return (
         <>
             <Title
                 icon="fa-solid fa-triangle-exclamation"
                 title="QUẢN LÝ SỰ CỐ"
-                placeholder="Tìm kiếm theo tên, mã sự cố,..."
+                placeholder="Tìm kiếm theo tên, loại sự cố,..."
+                search={search}
+                onSearch={onSearch}
             >
                 <div className="filter-box">
-                    <select defaultValue="">
+                    <select value={filters.status || ""}
+                            onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
                         <option value="">Trạng thái</option>
                         <option value="Chờ Phân Công">Chờ Phân Công</option>
                         <option value="Chờ Tiếp Nhận">Chờ Tiếp Nhận</option>

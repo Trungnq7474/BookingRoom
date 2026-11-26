@@ -1,7 +1,7 @@
 import Table from "../../../../components/Table/Table.jsx";
 import useUsers from "../../../../hooks/useUsers.js";
 
-function ProblemTable({ onView, data, onDelete }) {
+function ProblemTable({ onView, data, onDelete, onAssign }) {
 
     const { users } = useUsers();
     
@@ -57,15 +57,18 @@ function ProblemTable({ onView, data, onDelete }) {
         {
             title: "Nhân Viên Phân Công",
             key: "employment",
-            render: (value) => (
+            render: (value, item) => (
                 <div className="common-select">
-                    <select defaultValue={value || ""}>
-                        <option value="">-</option>
+                    <select value={item.status === "Chờ Phân Công" ? "" : value || ""} onChange={(e) => onAssign(item.incident_id, e.target.value)}>
+                        {item.status === "Chờ Phân Công"
+                            ? <option value="">Chọn Nhân Viên Kỹ Thuật</option>
+                            : null
+                        }
 
                         {users.filter((user) => {
                             return user.role === "Nhân Viên Kỹ Thuật";
                         }).map((user) => (
-                            <option key={user.user_id} value={user.full_name}>
+                            <option key={user.user_id} value={user.user_id}>
                                 {user.full_name}
                             </option>
                         ))}

@@ -44,4 +44,24 @@ const deleteIncident = async (req, res) => {
     }
 };
 
-module.exports = { getIncident, deleteIncident };
+const assignIncident = async (req, res) => {
+    try {
+        const { incident_id } = req.params;
+        const { employment } = req.body;
+
+        await db.promise().query(
+            `UPDATE incidents
+            SET employment = ?, status = ?
+            WHERE incident_id = ?`,
+            [employment, "Chờ Tiếp Nhận", incident_id]
+        );
+
+        res.json({ message: "Phân Công Sự Cố Thành Công !" });
+    }
+
+    catch (err) {
+        res.send(err.message);
+    }
+};
+
+module.exports = { getIncident, deleteIncident, assignIncident };

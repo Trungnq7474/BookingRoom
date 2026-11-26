@@ -16,7 +16,12 @@ function useBookings() {
             }
         };
 
-        getBookings();
+        const interval = setInterval(() => {
+            getBookings();
+        }, 10);
+        
+        return () => clearInterval(interval);
+
     }, []);
 
     const deleteBookings = async (booking_id) => {

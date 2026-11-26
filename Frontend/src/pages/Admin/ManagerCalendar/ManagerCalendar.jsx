@@ -5,16 +5,28 @@ import CalendarDetail from "./CalendarDetail/CalendarDetail.jsx";
 import useDetail from "../../../hooks/useDetail.js";
 import useBookings from "../../../hooks/useBookings.js";
 import usePagination from "../../../hooks/usePagination.js";
+import useSearch from "../../../hooks/useSearch.js";
+import useFilter from "../../../hooks/useFilter.js";
 
 function ManagerCalendar() {
 
     const { showDetail, setShowDetail, selectedDetail, setSelectedDetail } = useDetail();
     const { bookings, deleteBookings, approveBookings, rejectBookings } = useBookings();
-    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(bookings);
+    const { search, setSearch, filteredData: searchedData } = useSearch(
+        bookings,
+        ["full_name", "role"]
+    );
+    const { filters, setFilters, filteredData } = useFilter(searchedData);
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(filteredData);
 
     return (
         <>
-            <CalendarTitle />
+            <CalendarTitle
+                search={search}
+                onSearch={setSearch}
+                filters={filters}
+                setFilters={setFilters}
+            />
 
             <section className="content">
 
@@ -25,7 +37,7 @@ function ManagerCalendar() {
                     }}
                     onDelete={(item) => {
                         const confirmDelete = window.confirm(
-                            `Bạn Có Chắc Chắn Muốn Xóa Đăng ký "${item.type}" Không?`
+                            `Bạn Có Chắc Chắn Muốn Xóa Đăng Ký Của "${item.full_name}" Không?`
                         );
 
                         if(confirmDelete) {

@@ -62,7 +62,20 @@ function ProblemDetail({ onClose, incident }) {
 
                             <p>
                                 <i className="fa-regular fa-id-card"></i>
-                                <span><b>Vai Trò:</b> <strong>{incident?.role}</strong></span>
+                                <span>
+                                    <b>Vai Trò: </b>
+                                    <strong className={
+                                            incident?.role === "Sinh Viên"
+                                            ? "common-student"
+                                            : incident?.role === "Giảng Viên"
+                                            ? "common-teacher"
+                                            : incident?.role === "Nhân Viên Kỹ Thuật"
+                                            ? "common-technician"
+                                            : ""
+                                    }>
+                                        {incident?.role}
+                                    </strong>
+                                </span>
                             </p>
 
                             <p>
@@ -74,7 +87,7 @@ function ProblemDetail({ onClose, incident }) {
                         <div className="detail-column">
                             <p>
                                 <i className="fa-regular fa-calendar"></i>
-                                <span><b>Thời Gian Báo Cáo:</b> {new Date(incident.report_time).toLocaleString("vi-VN")}</span>
+                                <span><b>Thời Gian Báo Cáo:</b> {new Date(incident?.report_time).toLocaleString("vi-VN")}</span>
                             </p>
 
                             <p>
@@ -83,6 +96,18 @@ function ProblemDetail({ onClose, incident }) {
                                     <b>Mô Tả Sự Cố:</b> {incident?.description}
                                 </span>
                             </p>
+
+                            {incident?.status === "Đã Hoàn Thành"
+                                ? <p>
+                                    <i className="fa-solid fa-calendar-check"></i>
+                                    <span>
+                                        <b>Thời Gian Hoàn Thành:</b> {incident?.completion_time
+                                            ? new Date(incident?.completion_time).toLocaleString("vi-VN")
+                                            : ""}
+                                    </span>
+                                </p>
+                                : ""
+                            }
                         </div>
 
                     </div>

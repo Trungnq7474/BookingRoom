@@ -4,6 +4,7 @@ import library from "../assets/Room/library.jpg";
 import I001 from "../assets/Room/I001.jpg";
 import I002 from "../assets/Room/I002.jpg";
 import I101 from "../assets/Room/I101.png";
+import H005 from "../assets/Room/H005.png";
 import computer from "../assets/Equitment/computer.png";
 import headphone from "../assets/Equitment/headphone.png";
 import keyboard from "../assets/Equitment/keyboard.png";
@@ -17,6 +18,7 @@ const commonImages = {
     "I001.jpg": I001,
     "I002.jpg": I002,
     "I101.png": I101,
+    "H005.png": H005,
     "computer.png": computer,
     "headphone.png": headphone,
     "keyboard.png": keyboard,

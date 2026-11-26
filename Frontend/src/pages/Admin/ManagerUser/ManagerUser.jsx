@@ -6,17 +6,30 @@ import useAdd from "../../../hooks/useAdd.js";
 import useEdit from "../../../hooks/useEdit.js";
 import useUsers from "../../../hooks/useUsers.js";
 import usePagination from "../../../hooks/usePagination.js";
+import useSearch from "../../../hooks/useSearch.js";
+import useFilter from "../../../hooks/useFilter.js";
 
 function ManagerUser() {
 
     const { show, setShow } = useAdd();
     const { showEdit, setShowEdit, selectedItem, setSelectedItem } = useEdit();
     const { users, addUsers, editUsers, deleteUsers } = useUsers();
-    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(users);
+    const { search, setSearch, filteredData: searchedData } = useSearch(
+        users,
+        ["full_name", "user_code"]
+    );
+    const { filters, setFilters, filteredData } = useFilter(searchedData);
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(filteredData);
 
     return (
         <>
-            <UserTitle onAdd={() => setShow(true)} />
+            <UserTitle 
+                onAdd={() => setShow(true)}
+                search={search}
+                onSearch={setSearch}
+                filters={filters}
+                setFilters={setFilters} 
+            />
 
             <section className="content">
 

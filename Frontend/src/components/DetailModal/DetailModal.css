@@ -23,8 +23,7 @@
 
 .detail-modal {
     position: relative;
-    width: 100%;
-    max-width: 900px;
+    width: 948px;
     background: #f5f5f5;
     border-radius: 20px;
     padding: 40px 20px 18px;
@@ -157,6 +156,11 @@
     background: #26964b;
 }
 
+.detail-status.rejected-status {
+    top: -28px;
+    background: rgb(217, 0, 22);
+}
+
 .detail-status.received-status {
     top: -28px;
     background: #657765;
@@ -171,6 +175,7 @@
     background: #f3f3f3;
     border-radius: 22px;
     padding: 15px;
+    width: 828px;
 }
 
 .detail-registration-inner {
@@ -186,7 +191,7 @@
 
 .detail-columns {
     display: grid;
-    grid-template-columns: 1.02fr 1.1fr;
+    grid-template-columns: 1fr 1.08fr;
 }
 
 .detail-column {
@@ -195,6 +200,7 @@
 
 .detail-column:first-child {
     border-right: 1px solid #d5d5d5;
+    margin-right: 20px;
 }
 
 .detail-column p {
@@ -215,7 +221,15 @@
     color: #00678d;
 }
 
-.detail-column p strong {
+.detail-column p strong .common-student {
+    color: rgb(4, 0, 255);
+}
+
+.detail-column p strong .common-teacher {
+    color: rgb(2, 0, 110);
+}
+
+.detail-column p strong .common-technician {
     color: #005f63;
 }
 

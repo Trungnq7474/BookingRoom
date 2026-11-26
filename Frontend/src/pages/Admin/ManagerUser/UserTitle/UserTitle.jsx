@@ -1,6 +1,6 @@
 import Title from "../../../../components/Title/Title.jsx";
 
-function UserTitle({ onAdd }) {
+function UserTitle({ onAdd, search, onSearch, filters, setFilters }) {
     return (
         <>
             <Title
@@ -9,9 +9,12 @@ function UserTitle({ onAdd }) {
                 placeholder="Tìm kiếm theo tên, mã số,..."
                 buttonText="Thêm Người Dùng"
                 onAdd={onAdd}
+                search={search}
+                onSearch={onSearch}
             >
                 <div className="filter-box">
-                    <select defaultValue="">
+                    <select value={filters.role || ""}
+                            onChange={(e) => setFilters({ ...filters, role: e.target.value })}>
                         <option value="">Vai trò</option>
                         <option value="Admin">Admin</option>
                         <option value="Sinh Viên">Sinh Viên</option>

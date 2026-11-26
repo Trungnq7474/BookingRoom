@@ -8,6 +8,8 @@ import useEdit from "../../../hooks/useEdit.js"
 import useDetail from "../../../hooks/useDetail.js"
 import useTools from "../../../hooks/useTools.js";
 import usePagination from "../../../hooks/usePagination.js";
+import useSearch from "../../../hooks/useSearch.js";
+import useFilter from "../../../hooks/useFilter.js";
 
 function ManagerTool() {
 
@@ -15,11 +17,22 @@ function ManagerTool() {
     const { showEdit, setShowEdit, selectedItem, setSelectedItem } = useEdit();
     const { showDetail, setShowDetail, selectedDetail, setSelectedDetail } = useDetail();
     const { tools, addTools, editTools, deleteTools } = useTools();
-    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(tools);
+    const { search, setSearch, filteredData: searchedData } = useSearch(
+        tools,
+        ["toolname"]
+    );
+    const { filters, setFilters, filteredData } = useFilter(searchedData);
+    const { currentPage, setCurrentPage, pages, pagesNumber } = usePagination(filteredData);
 
     return (
         <>
-            <ToolTitle onAdd={() => setShow(true)} />
+            <ToolTitle 
+                onAdd={() => setShow(true)}
+                onSearch={setSearch}
+                search={search}
+                filters={filters}
+                setFilters={setFilters}
+            />
 
             <section className="content">
 

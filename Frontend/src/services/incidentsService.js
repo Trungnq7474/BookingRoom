@@ -8,3 +8,9 @@ export const getIncident = () => {
 export const deleteIncident = (incident_id) => {
     return axios.delete(`${API}/incidents/${incident_id}`);
 };
+
+export const assignIncident = (incident_id, employment) => {
+    return axios.put(`${API}/incidents/${incident_id}`, {
+        employment
+    });
+};

@@ -2,6 +2,21 @@ const db = require("../config/database.js");
 
 const getBooking = async (req, res) => {
     try {
+        await db.promise().query(
+            `UPDATE bookings SET
+                status = "Đang Sử Dụng"
+            WHERE status = "Đã Duyệt"
+            AND start_time <= NOW()
+            AND end_time > NOW()`
+        );
+
+        await db.promise().query(
+            `UPDATE bookings SET
+                status = "Đã Sử Dụng"
+            WHERE status = "Đang Sử Dụng"
+            AND end_time <= NOW()`
+        );
+
         const [result] = await db.promise().query(
             `SELECT 
                 b.*,
@@ -90,7 +105,8 @@ const rejectBooking = async (req, res) => {
 
         await db.promise().query(
             `UPDATE bookings SET
-            status = "Đã Từ Chối"
+            status = "Đã Từ Chối",
+            rejection_time = NOW()
             WHERE booking_id = ?`,
             [booking_id]
         );
