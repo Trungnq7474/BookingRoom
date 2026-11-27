@@ -1,20 +1,21 @@
 import BoardTitle from "./BoardTitle/BoardTitle.jsx";
 import BoardActive from "./BoardActive/BoardActive.jsx";
 import BoardTable from "./BoardTable/BoardTable.jsx";
-// import Pagination from "../../../components/Pagination/Pagination.jsx";
+import useDashboards from "../../../hooks/useDashboards.js";
 
 function DashBoard() {
+
+    const { dashboards } = useDashboards();
+
     return (
         <>
-            <BoardTitle />
+            <BoardTitle dashboards={dashboards}/>
 
-            <BoardActive />
+            <BoardActive dashboards={dashboards}/>
 
             <section className="content">
 
-                <BoardTable />
-
-                {/* <Pagination /> */}
+                <BoardTable data={dashboards?.recentActivities || []}/>
 
             </section>
         </>

@@ -1,7 +1,7 @@
 import "./BoardTitle.css";
 import { Link } from "react-router-dom";
 
-function BoardTitle() {
+function BoardTitle({ dashboards }) {
     return (
         <>
             <div className="dashboard-title">
@@ -17,7 +17,7 @@ function BoardTitle() {
                     </div>
                     <div>
                         <p>Tổng Số Phòng</p>
-                        <h2>25</h2>
+                        <h2>{dashboards?.totalRooms || 0}</h2>
                     </div>
                 </Link>
 
@@ -27,7 +27,7 @@ function BoardTitle() {
                     </div>
                     <div>
                         <p>Tổng Thiết Bị</p>
-                        <h2>350</h2>
+                        <h2>{dashboards?.totalTools || 0}</h2>
                     </div>
                 </Link>
 
@@ -37,7 +37,7 @@ function BoardTitle() {
                     </div>
                     <div>
                         <p>Đăng Ký Chờ Duyệt</p>
-                        <h2>12</h2>
+                        <h2>{dashboards?.pendingBookings || 0}</h2>
                     </div>
                 </Link>
 
@@ -47,7 +47,7 @@ function BoardTitle() {
                     </div>
                     <div>
                         <p>Sự Cố Chưa Xử Lý</p>
-                        <h2>08</h2>
+                        <h2>{dashboards?.pendingIncidents || 0}</h2>
                     </div>
                 </Link>
 

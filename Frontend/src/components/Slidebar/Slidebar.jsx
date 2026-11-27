@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useOpen from "../../hooks/useOpen.js";
 import './Slidebar.css';
+import Logo from "../../assets/logo.png";
 
 function Slidebar() {
 
@@ -16,7 +17,7 @@ function Slidebar() {
                 </div>
 
                 <div className="sidebar-header">
-                    <Link to="/"><h2>ADMIN</h2></Link>
+                    <Link to="/"><img src={Logo} alt="Logo" /></Link>
                 </div>
 
                 <nav className="sidebar-menu">

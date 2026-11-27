@@ -124,6 +124,18 @@
     font-weight: bold;
 }
 
+.common-activity h3 {
+    margin-top: -20px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #008b8e;
+    font-size: 18px;
+}
+
 .common-status-pending,
 .common-status-received,
 .common-status-using,

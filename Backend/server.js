@@ -8,6 +8,7 @@ const toolRoutes = require("./routes/toolRoutes.js");
 const bookingRoutes = require("./routes/bookingRoutes.js");
 const incidentRoutes = require("./routes/incidentRoutes.js");
 const maintenanceRoutes = require("./routes/maintenanceRoutes.js");
+const dashboardRoutes = require("./routes/dashboardRoutes.js");
 
 const app = express();
 const path = require("path");
@@ -23,6 +24,7 @@ app.use("/api/tools", toolRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/maintenances", maintenanceRoutes);
+app.use("/api/dashboards", dashboardRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend Đang Hoạt Động !");
