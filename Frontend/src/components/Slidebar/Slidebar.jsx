@@ -1,12 +1,21 @@
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext.js";
 import useOpen from "../../hooks/useOpen.js";
 import './Slidebar.css';
 import Logo from "../../assets/logo.png";
 
 function Slidebar() {
 
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
     const { isOpen, setIsOpen } = useOpen();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+        
+    };
 
     return (
         <>
@@ -17,11 +26,13 @@ function Slidebar() {
                 </div>
 
                 <div className="sidebar-header">
-                    <Link to="/"><img src={Logo} alt="Logo" /></Link>
+                    <Link to="/admin">
+                        <img src={Logo} alt="Logo" />
+                    </Link>
                 </div>
 
                 <nav className="sidebar-menu">
-                    <NavLink to="/" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
+                    <NavLink to="/admin" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
                         <i className="fa-solid fa-chart-line"></i>
                         <span>DashBoard</span>
                     </NavLink>
@@ -55,10 +66,9 @@ function Slidebar() {
                         <i className="fa-solid fa-screwdriver-wrench"></i>
                         <span>Bảo Trì</span>
                     </NavLink>
-                    
                 </nav>
 
-                <button className="logout">
+                <button className="logout" onClick={handleLogout}>
                     <i className="fa-solid fa-right-from-bracket"></i>
                     <span>Đăng Xuất</span>
                 </button>

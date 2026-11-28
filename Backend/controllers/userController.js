@@ -1,5 +1,33 @@
 const db = require("../config/database.js");
 
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const [result] = await db.promise().query(
+            `SELECT user_id, user_code, full_name, email, phone, role
+            FROM users
+            WHERE email = ? AND password = ?`,
+            [email, password]
+        );
+
+        if(result.length === 0) {
+            return res.json({
+                message: "Email Hoặc Mật Khẩu Không Đúng !"
+            });
+        }
+
+        res.json({
+            message: "Đăng nhập thành công!",
+            user: result[0]
+        })
+    }
+
+    catch (err) {
+        res.send(err.message);
+    }
+};
+
 const getUser = async (req, res) => {
     try {
         const [result] = await db.promise().query(
@@ -69,4 +97,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { getUser, addUser, editUser, deleteUser };
+module.exports = { login, getUser, addUser, editUser, deleteUser };

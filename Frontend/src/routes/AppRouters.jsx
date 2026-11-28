@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import LoginPage from "../pages/LoginPage/LoginPage.jsx";
 import MainLayoutAdmin from "../layouts/MainLayoutAdmin.jsx";
 import DashBoard from "../pages/Admin/DashBoard/DashBoard.jsx";
 import ManagerUser from "../pages/Admin/ManagerUser/ManagerUser.jsx";
@@ -13,6 +14,10 @@ function AppRouters() {
         <Routes>
 
             <Route path="/" element={
+                    <LoginPage />
+            } />
+
+            <Route path="/admin" element={
                 <MainLayoutAdmin>
                     <DashBoard />
                 </MainLayoutAdmin>
